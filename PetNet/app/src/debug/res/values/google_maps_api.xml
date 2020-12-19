@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=95:45:FE:CF:0D:69:ED:47:72:C2:FD:E0:10:75:53:A6:76:89:12:D5%3Bcom.maxrt.petnet.ui
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.maxrt.petnet.ui
+
+    SHA-1 certificate fingerprint:
+    95:45:FE:CF:0D:69:ED:47:72:C2:FD:E0:10:75:53:A6:76:89:12:D5
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBz58coJDIsq1IZDOX6e-1Y9K4PEL1A7aE</string>
+</resources>
