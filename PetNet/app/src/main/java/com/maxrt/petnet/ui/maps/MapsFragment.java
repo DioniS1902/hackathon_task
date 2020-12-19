@@ -43,6 +43,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
