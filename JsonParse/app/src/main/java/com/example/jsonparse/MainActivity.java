@@ -38,17 +38,19 @@ public class MainActivity extends AppCompatActivity {
         buttonParse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                     jsonParse();
             }
         });
     }
+
     private void jsonParse(){
-        String url = "https://graph.facebook.com/19292868552";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        String url = "https://jbokdxgfjkxfgnknl.000webhostapp.com/petdata.php?id=WCT15336";
+        JsonObjectRequest request = new JsonObjectRequest( url, null,
                 new Response.Listener<JSONObject>() {
+                    HashMap<String, String> dogData = new HashMap<String, String>();
                     @Override
                     public void onResponse(JSONObject response) {
-                        /*HashMap<String, String> dogData = new HashMap<String, String>();
                         try {
                             dogData.put("name" ,response.getString("name"));
                             dogData.put("view" ,response.getString("view"));
@@ -70,15 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         for(String key: dogData.keySet()){
                             mTextViewResult.append(key + ": " + dogData.get(key) + '\n');
-                        }*/
-                        String message = "";
-                        try {
-                            JSONObject error = response.getJSONObject("error");
-                            message = error.getString("message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                        mTextViewResult.append(message);
                     }
                 }, new Response.ErrorListener() {
             @Override
