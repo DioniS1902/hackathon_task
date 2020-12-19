@@ -10,8 +10,9 @@
         android:id="@+id/navigation_maps"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/title_maps" />
+
     <item
-        android:id="@+id/navigation_qr_code_scan"
+        android:id="@+id/navigation_qr_code_reader"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_qr_code_scan" />
 

@@ -30,8 +30,6 @@ public class QRCodeScanFragment extends Fragment {
         previewView = root.findViewById(R.id.camera_previewView);
         cameraProviderFuture = ProcessCameraProvider.getInstance(getActivity());
 
-        ((MainActivity)getActivity()).requestCamera();
-
         return root;
     }
 
