@@ -62,12 +62,5 @@ public class HomeFragment extends Fragment {
         queue.add(request);
     }*/
 
-    private void setDataFields(JSONObject json) {
-        /*try {
-            // Code
-        } catch (JSONException e) {
-            Log.e("HomeFragment", e.getMessage());
-            e.printStackTrace();
-        }*/
-    }
+    private void setDataFields(JSONObject json) {}
 }
