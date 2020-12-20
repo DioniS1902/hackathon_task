@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             try {
-                settings = new JSONObject("{\"id\"=\"0\"}");
+                settings = new JSONObject("{\"id\"=\"WCT15336\"}");
             } catch (org.json.JSONException e) {
                 Log.e("loadSettings", e.getMessage());
             }
