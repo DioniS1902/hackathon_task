@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static String qrCodeId = "0";
+    public static NavController nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +85,19 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
+        nav = navController;
         //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        if (fileApi.fileExist(this, "user_data.json")) {
+            String text = fileApi.readFile(this, "user_data.json");
+            try {
+                JSONObject settings = new JSONObject(text);
+            } catch (org.json.JSONException e) {
+                Log.e("MainActivity", e.getMessage());
+            }
+        }
     }
 
 }

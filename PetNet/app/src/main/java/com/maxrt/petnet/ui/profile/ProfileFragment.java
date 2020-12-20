@@ -1,5 +1,6 @@
 package com.maxrt.petnet.ui.profile;
 
+import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,22 +36,12 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
-//        final TextView textView = root.findViewById(R.id.text_notifications);
-//        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
-//        WebView myWebView = (WebView) root.findViewById(R.id.profile_webview);
-//        myWebView.loadUrl("https://animal-id.net/ua/animal/profile/46923");
 
         textField = root.findViewById(R.id.textViewInfo);
         queue = Volley.newRequestQueue(getContext());
 
-        String id = "WCT15336";
-        String fileName = id + ".json";
+//        String id = "WCT15336";
+        String fileName = MainActivity.qrCodeId + ".json";
 
         if (MainActivity.fileApi.fileExist(getContext(), fileName)) {
             try {
@@ -62,7 +53,7 @@ public class ProfileFragment extends Fragment {
                 Log.e("ProfileFragment", e.getMessage());
             }
         } else {
-            getJSON(id);
+            getJSON(MainActivity.qrCodeId);
         }
 
         return root;

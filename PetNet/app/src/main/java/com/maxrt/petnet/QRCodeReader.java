@@ -3,6 +3,7 @@ package com.maxrt.petnet;
 import androidx.annotation.NonNull;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -32,6 +34,7 @@ import java.util.concurrent.ExecutionException;
 public class QRCodeReader extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CAMERA = 0;
+
     private PreviewView previewView;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 
@@ -59,6 +62,7 @@ public class QRCodeReader extends AppCompatActivity {
 
         requestCamera();
     }
+
 
     @Override
     public void onStop () {
@@ -115,7 +119,14 @@ public class QRCodeReader extends AppCompatActivity {
             @Override
             public void onQRCodeFound(String qrCodeText) {
                 qrCode = qrCodeText;
-                qrCodeFoundButton.setVisibility(View.VISIBLE);
+                Toast.makeText(getApplicationContext(), qrCode, Toast.LENGTH_LONG).show();
+                Log.e("QRCodeReader", "QR Code Found: " + qrCode);
+                // Parse
+                MainActivity.qrCodeId = qrCode.substring(qrCode.lastIndexOf('/')+1, qrCode.length());
+                finish();
+                // Navigation.findNavController(findViewById(R.id)).navigate(R.id.navigation_profile);
+                // MainActivity.nav.navigate(R.id.navigation_profile);
+                // qrCodeFoundButton.setVisibility(View.VISIBLE);
             }
 
             @Override

@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = root.findViewById(R.id.text_home);
 
-        String url= "http://webhook.42web.io/petdata.php?id=46923";
+//        String url= "http://webhook.42web.io/petdata.php?id=46923";
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
