@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        textField = root.findViewById(R.id.textViewInfo);
+        textField = root.findViewById(R.id.textView);
         queue = Volley.newRequestQueue(getContext());
 
 //        String id = "WCT15336";
