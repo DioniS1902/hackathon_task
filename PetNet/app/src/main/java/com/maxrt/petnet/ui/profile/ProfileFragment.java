@@ -1,6 +1,5 @@
 package com.maxrt.petnet.ui.profile;
 
-import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

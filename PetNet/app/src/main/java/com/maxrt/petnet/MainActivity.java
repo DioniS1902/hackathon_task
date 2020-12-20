@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.common.util.IOUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;

@@ -1,7 +1,5 @@
 package com.maxrt.petnet.ui.maps;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,19 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-
-
 
 public class MapsFragment extends Fragment {
 
-
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -56,27 +44,31 @@ public class MapsFragment extends Fragment {
                 String text = MapData.readFile(getContext());
                 Log.d("ProfileFragment", text);
                 json = new JSONObject(text);
-
             } catch (Exception e) {
                 Log.e("ProfileFragment", e.getMessage());
             }
+
             JSONArray jsarr = null;
+
             try {
                 jsarr= json.getJSONArray("Places");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            for(int i=0;i < jsarr.length();i++) {
+            for(int i = 0; i < jsarr.length(); i++) {
                 try {
-                    googleMap.addMarker(new MarkerOptions().position(new LatLng(jsarr.getJSONObject(i).getDouble("v"), jsarr.getJSONObject(i).getDouble("v1"))).title(jsarr.getJSONObject(i).getString("name"))).setIcon(BitmapDescriptorFactory.fromAsset(jsarr.getJSONObject(i).getString("img")));
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(jsarr.getJSONObject(i).getDouble("v"), jsarr.getJSONObject(i).getDouble("v1")))
+                            .title(jsarr.getJSONObject(i).getString("name")))
+                            .setIcon(BitmapDescriptorFactory.fromAsset(jsarr.getJSONObject(i).getString("img")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+
             googleMap.moveCamera(CameraUpdateFactory.zoomTo(12));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(new  LatLng(49.84289512798616, 24.026557047742685)));
-
         }
     };
 
