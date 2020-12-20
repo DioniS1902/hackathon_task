@@ -22,6 +22,7 @@
         android:name="com.maxrt.petnet.QRCodeReader"
         android:label="activity_qr_code_reader"
         tools:layout="@layout/activity_qr_code_reader" />
+
     <fragment
         android:id="@+id/navigation_maps"
         android:name="com.maxrt.petnet.ui.maps.MapsFragment"
