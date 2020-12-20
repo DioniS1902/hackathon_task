@@ -1,16 +1,73 @@
 package com.maxrt.petnet;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.common.util.IOUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Scanner;
+
+
 public class MainActivity extends AppCompatActivity {
+
+    public static class fileApi {
+        public static boolean fileExist(Context context, String fileName){
+            File file = context.getFileStreamPath(fileName);
+            return file.exists();
+        }
+
+        public static String readFile(Context context, @NotNull String fileName) {
+            FileInputStream inputStream;
+            String text = "";
+            try {
+                inputStream = context.openFileInput(fileName);
+                Scanner sc = new Scanner(inputStream);
+                StringBuffer sb = new StringBuffer();
+                while (sc.hasNext()) {
+                    sb.append(sc.nextLine());
+                }
+                text = sb.toString();
+                Log.e("TEXT", text);
+                inputStream.close();
+            } catch (Exception e) {
+                Log.e("readFile", e.getMessage());
+                e.printStackTrace();
+            }
+            return text;
+        }
+
+        public static void writeFile(Context context, @NonNull String fileName, @NotNull String content, boolean update) {
+            FileOutputStream outputStream;
+
+            try {
+                if (update) {
+                    outputStream = context.openFileOutput(fileName, Context.MODE_APPEND);
+                } else {
+                    outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+                }
+                outputStream.write(content.getBytes());
+                outputStream.flush();
+                outputStream.close();
+            } catch (Exception e) {
+                Log.e("writeFile", e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,4 +85,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
+
 }

@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.maxrt.petnet.MainActivity;
 import com.maxrt.petnet.R;
 
 import org.json.JSONArray;
@@ -47,7 +48,22 @@ public class ProfileFragment extends Fragment {
 
         textField = root.findViewById(R.id.textViewInfo);
         queue = Volley.newRequestQueue(getContext());
-        getJSON("WCT15336");
+
+        String id = "WCT15336";
+        String fileName = id + ".json";
+
+        if (MainActivity.fileApi.fileExist(getContext(), fileName)) {
+            try {
+                String text = MainActivity.fileApi.readFile(getContext(), fileName);
+                Log.d("ProfileFragment", text);
+                json = new JSONObject(text);
+                setText(json);
+            } catch (Exception e) {
+                Log.e("ProfileFragment", e.getMessage());
+            }
+        } else {
+            getJSON(id);
+        }
 
         return root;
     }
@@ -60,18 +76,8 @@ public class ProfileFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         json = response;
                         Log.e("DataRequest", json.toString());
-                        try {
-                            Iterator<String> keys = json.keys();
-                            while (keys.hasNext()) {
-                                String k = keys.next();
-                                Log.i("Info", "Key: " + k + ", value: " + json.getString(k));
-                                textField.append(k + ": " + json.getString(k) + "\n");
-                            }
-
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-
+                        MainActivity.fileApi.writeFile(getContext(), id + ".json", json.toString(), false);
+                        setText(json);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -80,5 +86,19 @@ public class ProfileFragment extends Fragment {
             }
         });
         queue.add(request);
+    }
+
+    private void setText(JSONObject json) {
+        try {
+            Iterator<String> keys = json.keys();
+            while (keys.hasNext()) {
+                String k = keys.next();
+                Log.i("Info", "Key: " + k + ", value: " + json.getString(k));
+                textField.append(k + ": " + json.getString(k) + "\n");
+            }
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
     }
 }
