@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         loadSettings(this);
+        try {
+            qrCodeId = settings.getString("id");
+        } catch (org.json.JSONException e) {
+            Log.e("MainActivity", e.getMessage());
+        }
     }
 
     public static void loadSettings(Context context) {
