@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="414dp"
+        android:layout_height="223dp"
+        app:srcCompat="@drawable/header"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="-5dp" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="412dp"
+        android:layout_height="327dp"
+        app:srcCompat="@drawable/undraw_playing_fetch_cm19_1"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="403dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        android:layout_width="166dp"
+        android:layout_height="62dp"
+        android:fontFamily="@font/poppins"
+        android:text="PetNet"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="395dp"
+        android:layout_height="78dp"
+        android:fontFamily="@font/poppins"
+        android:text="все для вашого улюбленця в телефоні"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="268dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#F2D0A7"
+        android:fontFamily="@font/poppins"
+        android:text="Розпочати"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:cornerRadius="45"
+        app:iconTint="#F2D0A7"
+        app:rippleColor="#F2D0A7"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="346dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
