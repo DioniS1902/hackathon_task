@@ -1,3 +1,4 @@
+
 <?php
 $id=$_GET["id"];
 $pos = strpos($id, "WCT");
@@ -36,6 +37,6 @@ $arr->otherIdentifiers = ltrim($data->item(12)->nodeValue,"\n");
 $arr->img = ltrim($img,"\n");
 
 $myJSON = json_encode($arr, JSON_UNESCAPED_UNICODE);
-
+header('Content-Type: application/json');
 echo $myJSON;
 ?>
