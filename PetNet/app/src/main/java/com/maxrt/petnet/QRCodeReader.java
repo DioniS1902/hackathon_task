@@ -100,6 +100,12 @@ public class QRCodeReader extends AppCompatActivity {
             public void onQRCodeFound(String qrCodeText) {
                 qrCode = qrCodeText;
                 MainActivity.qrCodeId = qrCode.substring(qrCode.lastIndexOf('/')+1, qrCode.length());
+                try {
+                    MainActivity.settings.put("id", MainActivity.qrCodeId);
+                    MainActivity.saveSettings(getApplicationContext());
+                } catch (org.json.JSONException e) {
+                    Log.e("QRCodeReader", e.getMessage());
+                }
                 finish();
             }
 

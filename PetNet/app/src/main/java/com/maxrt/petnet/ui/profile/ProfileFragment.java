@@ -43,12 +43,6 @@ public class ProfileFragment extends Fragment {
 //        String id = "WCT15336";
         MainActivity.loadSettings(getContext());
 
-        try {
-            MainActivity.qrCodeId = MainActivity.settings.getString("id");
-        } catch (org.json.JSONException e) {
-            Log.e("ProfileFragment", e.getMessage());
-        }
-
         String fileName = MainActivity.qrCodeId + ".json";
 
         if (MainActivity.fileApi.fileExist(getContext(), fileName)) {

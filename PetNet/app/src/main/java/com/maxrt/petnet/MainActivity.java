@@ -2,6 +2,7 @@ package com.maxrt.petnet;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.style.IconMarginSpan;
 import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -110,9 +111,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static void saveSettings(Context context) {
+        fileApi.writeFile(context, settingsFileName, settings.toString(), false);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        fileApi.writeFile(getApplicationContext(), settingsFileName, settings.toString(), false);
+        saveSettings(this);
     }
 }
