@@ -29,6 +29,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutionException;
 
 public class QRCodeReader extends AppCompatActivity {
@@ -120,12 +122,12 @@ public class QRCodeReader extends AppCompatActivity {
             public void onQRCodeFound(String qrCodeText) {
                 qrCode = qrCodeText;
                 MainActivity.qrCodeId = qrCode.substring(qrCode.lastIndexOf('/')+1, qrCode.length());
-                try {
-                    Toast.makeText(getApplicationContext(), MainActivity.qrCodeId, Toast.LENGTH_SHORT).show();
-                    MainActivity.settings.put("id", MainActivity.qrCodeId);
-                } catch (org.json.JSONException e) {
-                    Log.e("QRCodeReader", e.getMessage());
-                }
+//                try {
+//                    Toast.makeText(getApplicationContext(), MainActivity.qrCodeId, Toast.LENGTH_SHORT).show();
+//                    MainActivity.settings.put("id", MainActivity.qrCodeId);
+//                } catch (org.json.JSONException e) {
+//                    Log.e("QRCodeReader", e.getMessage());
+//                }
                 finish();
             }
 

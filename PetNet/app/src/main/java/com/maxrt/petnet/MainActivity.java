@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     public static String qrCodeId = "0";
     public static JSONObject settings;
 
+    public MainActivity() {}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,14 +91,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        loadSettings();
+        loadSettings(this);
     }
 
-    private void loadSettings() {
-        if (fileApi.fileExist(this, settingsFileName)) {
-            String text = fileApi.readFile(this, settingsFileName);
+    public static void loadSettings(Context context) {
+        if (fileApi.fileExist(context, settingsFileName)) {
+            String text = fileApi.readFile(context, settingsFileName);
             try {
-                JSONObject settings = new JSONObject(text);
+                settings = new JSONObject(text);
             } catch (org.json.JSONException e) {
                 Log.e("loadSettings", e.getMessage());
             }
@@ -112,6 +114,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        fileApi.writeFile(this, settingsFileName, settings.toString(), false);
+        fileApi.writeFile(getApplicationContext(), settingsFileName, settings.toString(), false);
     }
 }

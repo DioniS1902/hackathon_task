@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.maxrt.petnet.MainActivity;
 import com.maxrt.petnet.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +41,14 @@ public class ProfileFragment extends Fragment {
         queue = Volley.newRequestQueue(getContext());
 
 //        String id = "WCT15336";
+        MainActivity.loadSettings(getContext());
+
+        try {
+            MainActivity.qrCodeId = MainActivity.settings.getString("id");
+        } catch (org.json.JSONException e) {
+            Log.e("ProfileFragment", e.getMessage());
+        }
+
         String fileName = MainActivity.qrCodeId + ".json";
 
         if (MainActivity.fileApi.fileExist(getContext(), fileName)) {
@@ -53,6 +61,12 @@ public class ProfileFragment extends Fragment {
                 Log.e("ProfileFragment", e.getMessage());
             }
         } else {
+            try {
+                Toast.makeText(getContext(), MainActivity.qrCodeId, Toast.LENGTH_SHORT).show();
+                MainActivity.settings.put("id", MainActivity.qrCodeId);
+            } catch (org.json.JSONException e) {
+                Log.e("QRCodeReader", e.getMessage());
+            }
             getJSON(MainActivity.qrCodeId);
         }
 
@@ -60,6 +74,9 @@ public class ProfileFragment extends Fragment {
     }
 
     public void getJSON(String id) {
+        if (id.equals("0")) {
+            return;
+        }
         String url = "https://jbokdxgfjkxfgnknl.000webhostapp.com/petdata.php?id=" + id;
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
