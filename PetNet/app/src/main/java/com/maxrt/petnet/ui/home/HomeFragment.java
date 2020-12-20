@@ -63,20 +63,11 @@ public class HomeFragment extends Fragment {
     }*/
 
     private void setDataFields(JSONObject json) {
-<<<<<<< HEAD
         /*try {
             // Code
         } catch (JSONException e) {
             Log.e("HomeFragment", e.getMessage());
             e.printStackTrace();
         }*/
-=======
-//        try {
-//            // Code
-//        } catch (JSONException e) {
-//            Log.e("HomeFragment", e.getMessage());
-//            e.printStackTrace();
-//        }
->>>>>>> b18448c4e729e2caef288d0b48b2941a130508ad
     }
 }

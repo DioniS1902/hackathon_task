@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.maxrt.petnet.MainActivity;
 import com.maxrt.petnet.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,15 +30,14 @@ import java.util.Iterator;
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
-    private TextView textField;
+    private View root;
     private RequestQueue queue;
     private JSONObject json;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        textField = root.findViewById(R.id.textView);
         queue = Volley.newRequestQueue(getContext());
 
 //        String id = "WCT15336";
@@ -97,13 +98,52 @@ public class ProfileFragment extends Fragment {
 
     private void setText(JSONObject json) {
         try {
-            Iterator<String> keys = json.keys();
-            while (keys.hasNext()) {
-                String k = keys.next();
-                Log.i("Info", "Key: " + k + ", value: " + json.getString(k));
-                textField.append(k + ": " + json.getString(k) + "\n");
-            }
+            TextView text = root.findViewById(R.id.textView17);
+            text.setText(json.getString("name"));
 
+            text = root.findViewById(R.id.textView20);
+            text.setText(json.getString("view"));
+
+            text = root.findViewById(R.id.textView21);
+            text.setText(json.getString("breed"));
+
+            text = root.findViewById(R.id.textView22);
+            text.setText(json.getString("sex"));
+
+            text = root.findViewById(R.id.textView23);
+            text.setText(json.getString("sterilization"));
+
+            text = root.findViewById(R.id.textView24);
+            text.setText(json.getString("dateOfBirth"));
+
+            text = root.findViewById(R.id.textView25);
+            text.setText(json.getString("owner"));
+
+            text = root.findViewById(R.id.textView26);
+            text.setText("");
+
+            text = root.findViewById(R.id.textView27);
+            text.setText(json.getString("registrationDate"));
+
+            text = root.findViewById(R.id.textView28);
+            text.setText("");
+
+            text = root.findViewById(R.id.textView29);
+            text.setText(json.getString("QRpassport"));
+
+            text = root.findViewById(R.id.textView30);
+            text.setText(json.getString("animalId"));
+
+            text = root.findViewById(R.id.textView31);
+            text.setText(json.getString("microchip"));
+
+            text = root.findViewById(R.id.textView32);
+            text.setText(json.getString("otherIdentifiers"));
+
+            ImageView img = root.findViewById(R.id.imageView2);
+            Picasso.with(getContext())
+                    .load(json.getString("img"))
+                    .into(img);
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
