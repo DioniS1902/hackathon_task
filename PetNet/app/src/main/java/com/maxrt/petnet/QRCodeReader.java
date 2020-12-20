@@ -119,14 +119,14 @@ public class QRCodeReader extends AppCompatActivity {
             @Override
             public void onQRCodeFound(String qrCodeText) {
                 qrCode = qrCodeText;
-                Toast.makeText(getApplicationContext(), qrCode, Toast.LENGTH_LONG).show();
-                Log.e("QRCodeReader", "QR Code Found: " + qrCode);
-                // Parse
                 MainActivity.qrCodeId = qrCode.substring(qrCode.lastIndexOf('/')+1, qrCode.length());
+                try {
+                    Toast.makeText(getApplicationContext(), MainActivity.qrCodeId, Toast.LENGTH_SHORT).show();
+                    MainActivity.settings.put("id", MainActivity.qrCodeId);
+                } catch (org.json.JSONException e) {
+                    Log.e("QRCodeReader", e.getMessage());
+                }
                 finish();
-                // Navigation.findNavController(findViewById(R.id)).navigate(R.id.navigation_profile);
-                // MainActivity.nav.navigate(R.id.navigation_profile);
-                // qrCodeFoundButton.setVisibility(View.VISIBLE);
             }
 
             @Override

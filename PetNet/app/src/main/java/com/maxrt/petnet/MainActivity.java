@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static final String settingsFileName = "user_data.json";
     public static String qrCodeId = "0";
-    public static NavController nav;
+    public static JSONObject settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +86,32 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        nav = navController;
-        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        if (fileApi.fileExist(this, "user_data.json")) {
-            String text = fileApi.readFile(this, "user_data.json");
+        loadSettings();
+    }
+
+    private void loadSettings() {
+        if (fileApi.fileExist(this, settingsFileName)) {
+            String text = fileApi.readFile(this, settingsFileName);
             try {
                 JSONObject settings = new JSONObject(text);
             } catch (org.json.JSONException e) {
-                Log.e("MainActivity", e.getMessage());
+                Log.e("loadSettings", e.getMessage());
+            }
+        } else {
+            try {
+                settings = new JSONObject("{\"id\"=\"0\"}");
+            } catch (org.json.JSONException e) {
+                Log.e("loadSettings", e.getMessage());
             }
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fileApi.writeFile(this, settingsFileName, settings.toString(), false);
+    }
 }
