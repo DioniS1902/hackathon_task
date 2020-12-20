@@ -40,12 +40,12 @@ public class HomeFragment extends Fragment {
 
         queue = Volley.newRequestQueue(getContext());
 
-        getJSON();
+        //getJSON();
 
         return root;
     }
 
-    public void getJSON() {
+    /*public void getJSON() {
         String url = "https://jbokdxgfjkxfgnknl.000webhostapp.com/sales.php";
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             }
         });
         queue.add(request);
-    }
+    }*/
 
     private void setDataFields(JSONObject json) {
 //        try {
